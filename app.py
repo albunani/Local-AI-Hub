@@ -295,7 +295,7 @@ def _render_summary_tab():
             else:
                 progress_box.empty()
 
-        with st.spinner("🧠 Thinking locally…"):
+        with st.spinner("🧠 Gemma is thinking locally…"):
             result = gemma_summary(st.session_state.doc_text, model, progress_callback=on_progress)
         progress_box.empty()
 
@@ -344,7 +344,7 @@ def _render_summary_tab():
 def _render_exam_tab():
     if st.button("Generate Exam", key="gen_exam", type="primary", use_container_width=True):
         _require_model()
-        with st.spinner("🧠 Thinking locally…"):
+        with st.spinner("🧠 Gemma is thinking locally…"):
             data = gemma_exam(st.session_state.doc_text, model)
         if "_raw" in data:
             st.warning("The model's response didn't come back as valid JSON. Try again.")
@@ -381,7 +381,7 @@ def _render_exam_tab():
 def _render_flashcards_tab():
     if st.button("Generate Flashcards", key="gen_flash", type="primary", use_container_width=True):
         _require_model()
-        with st.spinner("🧠 Thinking locally…"):
+        with st.spinner("🧠 Gemma is thinking locally…"):
             cards = gemma_flashcards(st.session_state.doc_text, model)
         st.session_state.last_flashcards = cards
         if cards:
@@ -407,7 +407,7 @@ def _render_flashcards_tab():
 def _render_quiz_tab():
     if st.button("Start New Quiz", key="gen_quiz", type="primary", use_container_width=True):
         _require_model()
-        with st.spinner("🧠 Thinking locally…"):
+        with st.spinner("🧠 Gemma is thinking locally…"):
             data = gemma_quiz(st.session_state.doc_text, model)
         questions = data.get("questions", [])
         if questions:
@@ -500,7 +500,7 @@ def _stream_response(stream_fn, button_label, state_key):
             return
         with st.container(border=True):
             try:
-                with st.spinner("🧠 Thinking locally…"):
+                with st.spinner("🧠 Gemma is thinking locally…"):
                     full_text = st.write_stream(stream_fn())
             except Exception as e:
                 st.error(f"Error: {e}")
