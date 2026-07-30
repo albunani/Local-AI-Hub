@@ -1,21 +1,161 @@
+<div align="center">
+
 # 🧭 Local AI Hub
 
-**Gemma 4-Powered Offline Community Assistant**
+### Gemma 4-Powered Offline Community Assistant
 
-A single Streamlit app that puts four AI assistants — Education, Healthcare,
-Agriculture, and Emergency — behind one sidebar, all running on a local Gemma
-model through Ollama. No internet connection required after setup.
+**Education. Healthcare. Agriculture. Emergency.**
+**One assistant, four domains, zero internet required.**
+
+</div>
 
 ---
 
-## Why this exists
+## Overview
 
-Most hackathon AI projects are "chat with your PDF." This is a **community
-knowledge tool**: upload a document once and get a full study workflow out of
-it (summary, flashcards, quiz, exam), or ask a direct question — in Education
-without any document at all, or in Healthcare, Agriculture, and Emergency —
-and get a straight, streamed answer. All offline, all on a laptop, no cloud
-API key in sight.
+Local AI Hub is a single desktop-grade web app that puts four AI assistants
+behind one sidebar — Education, Healthcare, Agriculture, and Emergency — all
+powered by a Gemma model running entirely on your own machine through
+[Ollama](https://ollama.com). No cloud API key. No internet connection after
+setup. No data ever leaves the device it's running on.
+
+Upload a document once and get a full study workflow out of it — summary,
+flashcards, quiz, exam — or just ask a direct question in any of the four
+domains and get a straight, streamed answer back.
+
+---
+
+## The Problem
+
+Most communities that would benefit most from AI assistance are the ones
+least likely to have reliable internet access: rural schools, clinics with
+patchy connectivity, farms far from broadband, and emergency situations
+where a network simply isn't available when it matters most. Meanwhile,
+almost every AI product assumes a live connection to a cloud API as a given.
+
+That assumption locks out exactly the people who'd benefit most.
+
+## Why Edge AI
+
+Running the model **on the device**, instead of calling out to a cloud API,
+changes what's possible:
+
+- **Works with zero connectivity** — a laptop with Ollama installed and a
+  model already pulled functions identically in a fully-wired office or in a
+  location with no signal at all.
+- **No per-request cost** — nothing metered, nothing rate-limited, nothing
+  that breaks when a free tier runs out.
+- **Data never leaves the device** — genuinely relevant for Healthcare and
+  Emergency use, where a person's symptoms or situation staying local isn't
+  just a nice-to-have.
+- **Predictable, honest trade-off** — responses are slower than a
+  data-center GPU would produce. That's stated plainly throughout this app
+  rather than hidden, because the alternative — no access at all — is worse.
+
+## Why Gemma 4
+
+Gemma is Google's line of open-weight models, small enough to run on
+consumer hardware (a 2B–4B parameter model fits comfortably on a laptop CPU
+or a modest GPU) while still being capable enough for real structured
+reasoning tasks: extracting key concepts from a document, writing exam
+questions with correct answers attached, or holding a plain conversational
+tone for a health question. It's also freely available with no licensing
+friction, which matters for a tool meant to reach communities with the
+fewest resources to spare on software costs.
+
+---
+
+## Key Features
+
+### 🎓 Education — the flagship domain
+Two modes, chosen with a toggle:
+
+- **💬 Ask a Question** — no document required. Any subject: math, physics,
+  biology, electronics, whatever a student is working through. Streamed
+  live, same as the other three domains.
+- **📚 Study from a Document** — upload a PDF, TXT, or MD file and get:
+  - **Summary** — key concepts, must-know formulas, common mistakes, and a
+    revision summary that scales with document length (long documents are
+    split into sections, summarized individually, then combined, so a
+    10-page document doesn't collapse into one thin paragraph)
+  - **Flashcards** — auto-generated, click to flip
+  - **Quiz** — interactive, graded on submit, with a weak/strong topic
+    breakdown
+  - **Generate Exam** — mixed multiple-choice and short-answer paper with
+    model answers
+
+Every generated result includes a **"Knowledge used for this answer"**
+panel — exactly how much of the document was read, and for Summary, exactly
+what length was targeted. Nothing about what the model actually saw is
+hidden behind the scenes.
+
+### 🩺 Healthcare
+Describe symptoms, get streamed general health information — always ending
+with a clear "not medical advice" disclaimer.
+
+### 🌾 Agriculture
+Ask a crop question (with an optional crop name), get streamed practical
+advice on best practices and seasonal timing.
+
+### 🆘 Emergency
+Describe a situation, get streamed first-aid steps, what not to do, and
+when to call emergency services.
+
+### Reliability under the hood
+- **JSON repair for truncated output** — small local models occasionally
+  cut off mid-generation; the app salvages whatever complete fields exist
+  instead of showing a broken fragment.
+- **Key-name tolerance** — normalizes alternate JSON key names a model might
+  return, rather than silently showing empty results.
+- **Live model auto-detection** — the sidebar dropdown only ever shows
+  models Ollama actually reports as installed. No hardcoded model name that
+  can silently mismatch what's on the machine running it.
+- **Instant navigation** — switching between domains triggers exactly one
+  script rerun, not two.
+
+---
+
+## Screenshots
+
+### Main sidebar & Ollama connection
+![Home](screenshots/home.png)
+
+### Education — Ask a Question
+![Education](screenshots/education.png)
+
+### Education — Study from a Document
+| Summary | Flashcards |
+|---|---|
+| ![Summary](screenshots/study-workflow-summary.png) | ![Flashcards](screenshots/study-workflow-flashcards.png) |
+
+| Quiz (question) | Quiz (graded result) |
+|---|---|
+| ![Quiz question](screenshots/study-workflow-quiz-question.png) | ![Quiz result](screenshots/study-workflow-quiz-result.png) |
+
+![Generate Exam](screenshots/study-workflow-exam.png)
+
+### Healthcare Assistant
+![Healthcare](screenshots/healthcare.png)
+
+### Agriculture Assistant
+![Agriculture](screenshots/agriculture.png)
+
+### Emergency Assistant
+![Emergency](screenshots/emergency.png)
+
+### Offline Gemma 4 model selection
+![Model selector](screenshots/model-selector.png)
+
+### Ollama connection status
+![Ollama Connected](screenshots/ollama-connected.png)
+
+### Knowledge transparency
+![Knowledge Used](screenshots/knowledge-used.png)
+
+> See `screenshots/README_PLACEHOLDER.md` for the exact rename commands
+> used to get local capture filenames into the names referenced above, and
+> for the two screenshots (`healthcare.png`, `knowledge-used.png`) that
+> still need to be captured.
 
 ---
 
@@ -40,21 +180,35 @@ Does this need a local document?
 Streamed Response
 ```
 
-- **Education** can go either way: ask a quick question directly (no upload
-  needed), or upload a document first for Summary, Flashcards, Quiz, and
-  Generate Exam.
-- **Healthcare, Agriculture, and Emergency** always skip the document step
-  and go straight to Gemma.
-- Healthcare/Agriculture/Emergency and Education's "Ask a Question" mode use
-  **true token streaming** — text appears as Gemma generates it, satisfying
-  the "Streamed Response" step for real. The four document-based Education
-  features (Summary, Exam, Flashcards, Quiz) return structured JSON instead,
-  so those use one blocking call with a spinner — streaming raw JSON
-  character-by-character would just look broken until it's fully parsed.
+- **Education** can go either way: a quick question straight to Gemma, or a
+  document read first for the deeper study tools.
+- **Healthcare, Agriculture, and Emergency** always skip the document step.
+- Plain-prose answers (Healthcare/Agriculture/Emergency, and Education's Ask
+  a Question) use **true token streaming** — text appears as Gemma
+  generates it. Education's four document-based features return structured
+  JSON, so those use one blocking call with a spinner instead — streaming
+  raw JSON character-by-character would look broken until fully parsed.
 
 ---
 
-## Setup
+## Technology Stack
+
+| Layer | Technology |
+|---|---|
+| UI framework | [Streamlit](https://streamlit.io) |
+| Model runtime | [Ollama](https://ollama.com) (local inference server) |
+| Model | Gemma (any locally installed variant — auto-detected) |
+| PDF/text extraction | [pypdf](https://pypdf.readthedocs.io) |
+| HTTP client | [requests](https://requests.readthedocs.io) |
+| Language | Python 3 |
+
+No database. No backend server beyond Ollama itself. Three Python files,
+each with one clear job — `app.py` (UI), `gemma_client.py` (all model
+calls and prompts), `document_utils.py` (file text extraction).
+
+---
+
+## Installation
 
 ### 1. Install Ollama and pull a model
 
@@ -63,216 +217,93 @@ Streamed Response
 ollama pull gemma3:4b
 ```
 
-If you already have a different Gemma variant installed (e.g. `gemma4:e2b`,
-`gemma2:2b`), that's fine — the sidebar auto-detects every model you have
-installed via Ollama's API and lets you pick one from a dropdown. No
-hardcoded model name to edit.
+Already have a different Gemma variant installed (`gemma4:e2b`, `gemma2:2b`,
+etc.)? That's fine — the sidebar auto-detects every model you have and lets
+you pick from a dropdown. Nothing to hardcode.
 
-### 2. Start Ollama
-
-```bash
-ollama serve
-```
-
-(If Ollama is already running in the background — check your system tray —
-you can skip this. On Windows, if you get "address already in use," that
-just means it's already running.)
-
-### 3. Install Python dependencies
+### 2. Install Python dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-(On Windows, if `pip` isn't recognized, use `python -m pip install -r requirements.txt` instead.)
+On Windows, if `pip` isn't recognized: `python -m pip install -r requirements.txt`
 
-### 4. Run the app
+---
+
+## Running Locally
+
+### 1. Start Ollama
+
+```bash
+ollama serve
+```
+
+(Already running in your system tray? Skip this. On Windows, "address
+already in use" just confirms it's already running.)
+
+### 2. Launch the app
 
 ```bash
 streamlit run app.py
 ```
 
-(Same PATH note as above — if `streamlit` isn't recognized, use
-`python -m streamlit run app.py`.)
+On Windows, if `streamlit` isn't recognized: `python -m streamlit run app.py`
 
-It opens at `http://localhost:8501`. The sidebar will show **🟢 Ollama
-Connected** and a dropdown of every model you have installed — pick one and
-you're ready to go.
+It opens at `http://localhost:8501`. The sidebar shows **🟢 Ollama
+Connected** and a model dropdown — pick one and you're ready.
 
 ---
 
-## File structure
+## File Structure
 
 ```
 local-ai-hub/
-├── app.py                  ← Streamlit UI: sidebar nav, routing, all 4 domains
-├── gemma_client.py          ← Ollama API calls + every prompt used
-├── document_utils.py        ← PDF/TXT/MD text extraction
+├── app.py                    ← Streamlit UI: sidebar nav, routing, all 4 domains
+├── gemma_client.py            ← Ollama API calls + every prompt used
+├── document_utils.py          ← PDF/TXT/MD text extraction
 ├── requirements.txt
+├── LICENSE
 ├── .streamlit/
-│   └── config.toml          ← Dark theme, green accent
+│   └── config.toml            ← Dark theme, green accent
+├── screenshots/                ← Referenced by this README
 └── README.md
 ```
 
-Three Python files, each with one clear job. No database, no backend server
-beyond Ollama itself.
+---
+
+## Known Limitations
+
+- **Exam, Flashcards, and Quiz currently cap input at 2,500 characters**
+  regardless of the uploaded document's actual length (`SIMPLE_FEATURE_MAX_CHARS`
+  in `gemma_client.py`). Summary does not have this limitation — it scales
+  to document length via a map-reduce pass for long documents. On a document
+  longer than ~2,500 characters, an Exam/Flashcards/Quiz generated today
+  reflects roughly the first third of the material. The "Knowledge used"
+  panel under each of these three features states this plainly.
+- **Response speed depends entirely on local hardware.** CPU-only machines
+  will see noticeably longer waits than a machine with a capable GPU. This
+  is the honest trade-off of genuine offline execution — see "Why Edge AI"
+  above.
 
 ---
 
-## The sidebar
+## Future Improvements
 
-- **Navigation** — four buttons (not a dropdown or radio list): Education,
-  Healthcare, Agriculture, Emergency. The currently selected one fills solid
-  green (Streamlit's native `type="primary"` button style). Education always
-  carries a **⭐ FEATURED — FULL STUDY WORKFLOW** badge underneath it, since
-  it's the deepest feature set of the four.
-- **🔄 Check Ollama Connection** — forces an immediate recheck of what
-  Ollama has running, instead of waiting for the normal 5-second cache to
-  expire on its own.
-- **Model dropdown** — populated live from Ollama; only ever shows models
-  that are actually installed.
-- **🧠 How it works** — an expandable panel showing the architecture diagram
-  above, for quick reference during a demo.
-- A footer line stating the offline story plainly: *"Your local AI Node —
-  powered entirely by Gemma 4. Runs locally without internet."*
-
-Streamlit's own built-in "⋮" menu (top right) is left visible — Rerun,
-Settings (theme, wide mode), and **Record a screencast** are all genuinely
-useful, especially the screencast recorder for putting together a demo
-video. Only the **Deploy** button is hidden, since this project targets
-running locally, not publishing to Streamlit Community Cloud.
+- Raise (or eliminate) the Exam/Flashcards/Quiz character limit using the
+  same length-scaling approach already built for Summary
+- Explain Simply, a Study Planner, Learning Analytics, and an Activity
+  History log — all present in an earlier HTML prototype of this project,
+  cut for this build to keep scope tight and every domain genuinely
+  polished rather than four half-finished feature sets
+- Retrieval across multiple uploaded documents at once, rather than one
+  document per session
+- Optional export of generated study material (flashcards, exam) to a
+  downloadable file
 
 ---
 
-## Features
+## License
 
-### 🎓 Education
-
-Two modes, selected with a toggle at the top of the page:
-
-**💬 Ask a Question** — no document required. A free-form box for any
-subject: math, physics, biology, electronics, whatever. Answered by Gemma
-with a live streamed response, same as Healthcare/Agriculture/Emergency
-below. Comes with three example buttons (Newton's third law, photosynthesis,
-the quadratic formula) so a demo never has to invent a question live.
-
-**📚 Study from a Document** — upload a PDF, TXT, or MD file, then use:
-
-| Feature | What it does |
-|---|---|
-| **Summary** | Key concepts, must-know formulas, common mistakes, and a revision summary. Scales to document length: documents up to 10,000 characters get one direct pass; longer documents are split into sections, summarized individually, then combined into one final summary (map-reduce), so a long document gets a genuinely thorough result instead of one thin paragraph. The revision summary specifically targets **~18% of the source document's length**, expressed to the model as an explicit paragraph count plus a minimum word count — a soft "write about N words" suggestion is reliably ignored by small local models, so the prompt gives it a concrete structural target instead. |
-| **Flashcards** | Auto-generated front/back cards, click to reveal the answer. |
-| **Quiz** | Interactive multiple-choice quiz, graded on submit, with a weak/strong topic breakdown. |
-| **Generate Exam** | Mixed MCQ + short-answer exam paper with model answers. |
-
-Every result includes a **📚 Knowledge used for this answer** expander,
-showing exactly how much of the document was used and, for Summary, what
-length was targeted — so nothing about what the model actually saw is
-hidden.
-
-> **Known limitation:** Exam, Flashcards, and Quiz currently send only the
-> **first 2,500 characters** of an uploaded document to the model, regardless
-> of the document's actual length (this limit is `SIMPLE_FEATURE_MAX_CHARS`
-> in `gemma_client.py`). Summary does not have this limitation — it was
-> fixed to scale with document length as described above. On a document
-> longer than ~2,500 characters, an Exam/Flashcards/Quiz generated today
-> only reflects roughly the first third of the material, silently ignoring
-> the rest. The "Knowledge used" expander under each of these three features
-> states this plainly (e.g. *"Used the first 2,500 of 6,964 characters of
-> your document"*), but the underlying limit itself has not yet been raised
-> to match Summary's fix.
-
-### 🩺 Healthcare
-Describe symptoms → streamed general health information (never diagnostic —
-always ends with a "not medical advice" disclaimer).
-
-### 🌾 Agriculture
-Ask a crop question (with an optional crop name) → streamed practical advice
-covering best practices and seasonal timing.
-
-### 🆘 Emergency
-Describe a situation → streamed first-aid steps, what not to do, and when to
-call emergency services.
-
-All three non-Education domains include example buttons so a live demo never
-has to invent a question on the spot.
-
----
-
-## Reliability details worth knowing about
-
-- **JSON repair for truncated output** — small local models occasionally cut
-  off mid-generation. Instead of showing a broken fragment, the app tries to
-  salvage whatever complete fields exist by trimming to the last clean
-  boundary and closing any open brackets, before falling back to a plain
-  "try again" message.
-- **Key-name tolerance** — if the model returns `keyConcepts` instead of
-  `key_concepts` (or similar variations), the app normalizes it rather than
-  silently showing empty results.
-- **Streaming that surfaces real failures** — if Ollama genuinely returns no
-  usable text for a Healthcare/Agriculture/Emergency/Ask-a-Question request,
-  the app says so directly instead of showing a blank "success" card.
-- **Model auto-detection** — no model name is hardcoded anywhere; the
-  sidebar dropdown only ever shows models Ollama actually reports as
-  installed, which avoids the "model not found" class of error entirely.
-- **Instant navigation** — clicking between domains triggers exactly one
-  script rerun, not two, so switching pages feels immediate rather than
-  laggy.
-
----
-
-## What was deliberately left out
-
-The original HTML prototype also had Explain Simply, a Study Planner,
-Learning Analytics, and an Activity History log. Per the hackathon scoping
-call, those were cut for this build — two polished domains beat four
-half-finished ones, and every one of those four extra features was judged
-unlikely to move the needle on Gemma Integration, Innovation & Impact,
-Functionality, or Presentation relative to the time it'd cost. They're a
-natural "future work" list if there's time left after the core is solid.
-
----
-
-## Judging criteria alignment
-
-- **Gemma Integration (30%)** — every domain calls Gemma directly through
-  Ollama; Education's Summary feature includes real map-reduce logic for
-  long documents (not just a single truncated prompt), explicit length
-  targeting to counter small-model undershoot, and JSON parsing with a
-  repair step for output that cuts off mid-generation.
-- **Offline execution** — the entire app runs against `localhost:11434`.
-  No external API, no internet required after the model is pulled.
-- **Functionality (20%)** — file upload, four working document-based
-  features, a general-purpose Q&A mode, an interactive graded quiz, and
-  three streaming domain assistants, all tested end to end.
-- **Presentation & Writeup (20%)** — this README, plus a UI built to look
-  intentional: consistent dark theme, a featured-domain badge, response
-  cards, success confirmations, transparency into what the model actually
-  used, and a footer that states the offline story plainly.
-
----
-
-## Troubleshooting
-
-**Sidebar says "🔴 Ollama Not Found"**
-Ollama isn't reachable at `localhost:11434`. Run `ollama serve` in a
-terminal and click **🔄 Check Ollama Connection** in the sidebar.
-
-**"Model not found" error when generating**
-Run `ollama list` to see what's actually installed, then pick a matching
-name from the sidebar dropdown — it only ever shows models Ollama
-confirms it has.
-
-**PDF upload says "No text found"**
-The PDF is likely scanned/image-based rather than text-based. Use a
-text-based PDF, or paste the content into a `.txt` file instead.
-
-**Exam/Flashcards/Quiz seem to ignore parts of a long document**
-Expected for now — see the Known Limitation note under Education above.
-Summary does not have this issue.
-
-**Responses feel slow**
-That's expected on CPU-only hardware with a local model — this is the
-honest trade-off for running fully offline. The streaming responses
-(Healthcare/Agriculture/Emergency, and Education's Ask a Question) are
-there specifically so the wait still feels active rather than frozen.
+Released under the [MIT License](LICENSE) — free to use, modify, and
+distribute.
