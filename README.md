@@ -117,8 +117,14 @@ when to call emergency services.
 
 ## Screenshots
 
-### Main sidebar & Ollama connection
+### Main sidebar 
 ![Home](screenshots/home.png) (screenshots/ollama)
+
+### Offline Gemma 4 model selection
+![Model selector](screenshots/Model-selector.png)
+
+### Ollama connection status
+![Ollama Connected](screenshots/Ollama-Connected.png)
 
 ### Education — Ask a Question
 ![Education](screenshots/Education.png)
@@ -142,12 +148,6 @@ when to call emergency services.
 
 ### Emergency Assistant
 ![Emergency](screenshots/Emergency.png)
-
-### Offline Gemma 4 model selection
-![Model selector](screenshots/Model-selector.png)
-
-### Ollama connection status
-![Ollama Connected](screenshots/Ollama-Connected.png)
 
 ### Knowledge transparency
 ![Knowledge Used](screenshots/knowledge-used.png)
