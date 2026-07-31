@@ -152,10 +152,6 @@ when to call emergency services.
 ### Knowledge transparency
 ![Knowledge Used](screenshots/knowledge-used.png)
 
-> See `screenshots/README_PLACEHOLDER.md` for the exact rename commands
-> used to get local capture filenames into the names referenced above, and
-> for the two screenshots (`healthcare.png`, `knowledge-used.png`) that
-> still need to be captured.
 
 ---
 
