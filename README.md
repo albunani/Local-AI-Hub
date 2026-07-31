@@ -118,7 +118,7 @@ when to call emergency services.
 ## Screenshots
 
 ### Main sidebar & Ollama connection
-![Home](screenshots/home.png)
+![Home](screenshots/home.png) (screenshots/ollama)
 
 ### Education — Ask a Question
 ![Education](screenshots/education.png)
