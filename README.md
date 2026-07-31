@@ -121,16 +121,16 @@ when to call emergency services.
 ![Home](screenshots/home.png) (screenshots/ollama)
 
 ### Education — Ask a Question
-![Education](screenshots/education.png)
+![Education](screenshots/Education.png)
 
 ### Education — Study from a Document
 | Summary | Flashcards |
 |---|---|
-| ![Summary](screenshots/study-workflow-summary.png) | ![Flashcards](screenshots/study-workflow-flashcards.png) |
+| ![Summary](screenshots/study-workflow-0.png) | ![Flashcards](screenshots/study-workflow-1.png) |
 
 | Quiz (question) | Quiz (graded result) |
 |---|---|
-| ![Quiz question](screenshots/study-workflow-quiz-question.png) | ![Quiz result](screenshots/study-workflow-quiz-result.png) |
+| ![Quiz question](screenshots/study-workflow-2%20(1).png) | ![Quiz result](screenshots/study-workflow-2%20(2).png) |
 
 ![Generate Exam](screenshots/study-workflow-exam.png)
 
