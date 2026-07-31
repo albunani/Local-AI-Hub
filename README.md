@@ -137,7 +137,7 @@ when to call emergency services.
 | Summary Cont. | Summary Cont. |
 |---|---|
 | ![Summary Cont.](screenshots/study-workflow-2%20(1).png) | ![Summary Cont.](screenshots/study-workflow-2%20(2).png) |
-| Flashcards |
+|  Flashcards | Exam Quest |
 ![Flashcards](screenshots/study-workflow-1.png)
 
 ### Healthcare Assistant
