@@ -214,10 +214,10 @@ calls and prompts), `document_utils.py` (file text extraction).
 
 ```bash
 # Install from https://ollama.com, then:
-ollama pull gemma3:4b
+ollama pull gemma4:e2b
 ```
 
-Already have a different Gemma variant installed (`gemma4:e2b`, `gemma2:2b`,
+Already have a different Gemma variant installed (`gemma4:e2b`, `gemma4:e4b`,
 etc.)? That's fine — the sidebar auto-detects every model you have and lets
 you pick from a dropdown. Nothing to hardcode.
 
