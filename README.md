@@ -132,7 +132,7 @@ when to call emergency services.
 |---|---|
 | ![Quiz question](screenshots/study-workflow-2%20(1).png) | ![Quiz result](screenshots/study-workflow-2%20(2).png) |
 
-![Generate Exam](screenshots/study-workflow-exam.png)
+![Quiz result](screenshots/study-workflow-2%20(2).png)
 
 ### Healthcare Assistant
 ![Healthcare](screenshots/healthcare.png)
@@ -141,13 +141,13 @@ when to call emergency services.
 ![Agriculture](screenshots/agriculture.png)
 
 ### Emergency Assistant
-![Emergency](screenshots/emergency.png)
+![Emergency](screenshots/Emergency.png)
 
 ### Offline Gemma 4 model selection
-![Model selector](screenshots/model-selector.png)
+![Model selector](screenshots/Model-selector.png)
 
 ### Ollama connection status
-![Ollama Connected](screenshots/ollama-connected.png)
+![Ollama Connected](screenshots/Ollama-Connected.png)
 
 ### Knowledge transparency
 ![Knowledge Used](screenshots/knowledge-used.png)
