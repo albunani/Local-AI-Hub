@@ -124,14 +124,14 @@ when to call emergency services.
 ![Education](screenshots/Education.png)
 
 ### Education — Study from a Document
-| Summary | Flashcards |
+| Summary | Summary Cont. |
 |---|---|
 | ![Summary](screenshots/study-workflow-0.png) | ![Summary Cont.](screenshots/study-workflow-2%20(2).png) |
 
-| Quiz (question) | Quiz (graded result) |
+| Summary Cont. | Summary Cont. |
 |---|---|
 | ![Summary Cont.](screenshots/study-workflow-2%20(1).png) | ![Summary Cont.](screenshots/study-workflow-2%20(2).png) |
-
+| Flashcards |
 ![Flashcards](screenshots/study-workflow-1.png)
 
 ### Healthcare Assistant
