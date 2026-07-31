@@ -126,13 +126,13 @@ when to call emergency services.
 ### Education — Study from a Document
 | Summary | Flashcards |
 |---|---|
-| ![Summary](screenshots/study-workflow-0.png) | ![Flashcards](screenshots/study-workflow-1.png) |
+| ![Summary](screenshots/study-workflow-0.png) | ![Summary Cont.](screenshots/study-workflow-2%20(2).png) |
 
 | Quiz (question) | Quiz (graded result) |
 |---|---|
-| ![Quiz question](screenshots/study-workflow-2%20(1).png) | ![Quiz result](screenshots/study-workflow-2%20(2).png) |
+| ![Summary Cont.](screenshots/study-workflow-2%20(1).png) | ![Summary Cont.](screenshots/study-workflow-2%20(2).png) |
 
-![Quiz result](screenshots/study-workflow-2%20(2).png)
+![Flashcards](screenshots/study-workflow-1.png)
 
 ### Healthcare Assistant
 ![Healthcare](screenshots/healthcare.png)
