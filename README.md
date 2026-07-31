@@ -132,11 +132,11 @@ when to call emergency services.
 ### Education — Study from a Document
 | Summary | Summary Cont. |
 |---|---|
-| ![Summary](screenshots/study-workflow-0.png) | ![Summary Cont.](screenshots/study-workflow-2%20(2).png) |
+| ![Summary](screenshots/study-workflow-0.png) | ![Summary Cont.](screenshots/study-workflow-2%20%282%29.png) |
 
 | Summary Cont. | Summary Cont. |
 |---|---|
-| ![Summary Cont.](screenshots/study-workflow-2%20(1).png) | ![Summary Cont.](screenshots/study-workflow-2%20(2).png) |
+| ![Summary Cont.](screenshots/study-workflow-2%20%281%29.png) | ![Summary Cont.](screenshots/study-workflow-2%20%282%29.png) |
 | Flashcard | Exam Questions |
 |---|---|
 | ![Flashcard](screenshots/study-workflow-1.png) | ![Exam Questions](screenshots/exam.png) |
@@ -274,13 +274,6 @@ local-ai-hub/
 
 ## Known Limitations
 
-- **Exam, Flashcards, and Quiz currently cap input at 2,500 characters**
-  regardless of the uploaded document's actual length (`SIMPLE_FEATURE_MAX_CHARS`
-  in `gemma_client.py`). Summary does not have this limitation — it scales
-  to document length via a map-reduce pass for long documents. On a document
-  longer than ~2,500 characters, an Exam/Flashcards/Quiz generated today
-  reflects roughly the first third of the material. The "Knowledge used"
-  panel under each of these three features states this plainly.
 - **Response speed depends entirely on local hardware.** CPU-only machines
   will see noticeably longer waits than a machine with a capable GPU. This
   is the honest trade-off of genuine offline execution — see "Why Edge AI"
@@ -290,8 +283,6 @@ local-ai-hub/
 
 ## Future Improvements
 
-- Raise (or eliminate) the Exam/Flashcards/Quiz character limit using the
-  same length-scaling approach already built for Summary
 - Explain Simply, a Study Planner, Learning Analytics, and an Activity
   History log — all present in an earlier HTML prototype of this project,
   cut for this build to keep scope tight and every domain genuinely
